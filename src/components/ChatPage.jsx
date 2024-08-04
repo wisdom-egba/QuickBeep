@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Message from "./Message";
 
-const ChatPage = () => {
+const ChatPage = ({ list }) => {
   const [messages, setMessages] = useState([]);
   const [isLoading, setIsLoading] = useState();
   const [typeMessage, setTypeMessage] = useState("");
-  console.log(messages);
+  setMessages;
   // const newMessage = {
   //   id,
   //   senderId,
@@ -18,24 +18,24 @@ const ChatPage = () => {
   //   replies,
   //   forwardedFrom,
   // };
-  useEffect(() => {
-    const fetchMessage = async () => {
-      const apiUrl = `/api/messages`; //Rendering the API endpoint
-      try {
-        setIsLoading(true);
-        const res = await fetch(apiUrl);
-        console.log(res);
-        const data = await res.json();
-        console.log(data); //Fetches data
-        setMessages(data);
-      } catch (error) {
-        console.log("error", error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    fetchMessage();
-  }, []);
+  // useEffect(() => {
+  //   const fetchMessage = async () => {
+  //     const apiUrl = `/api/messages`; //Rendering the API endpoint
+  //     try {
+  //       setIsLoading(true);
+  //       const res = await fetch(apiUrl);
+  //       console.log(res);
+  //       const data = await res.json();
+  //       console.log(data); //Fetches data
+  //       setMessages(data);
+  //     } catch (error) {
+  //       console.log("error", error);
+  //     } finally {
+  //       setIsLoading(false);
+  //     }
+  //   };
+  //   fetchMessage();
+  // }, []);
   // const sendMessage = (text) => {
   //   setMessages([...messages, { text, isUser: true }]); // Add user message
   // };
@@ -44,8 +44,8 @@ const ChatPage = () => {
     <div className="flex flex-col h-screen bg-gray-200">
       <div className="flex-grow overflow-y-auto px-4 py-2">
         {/* Render messages from state */}
-        {messages.map((message, index) => (
-          <Message text={message} isUser={`true`} />
+        {list.map((message, index) => (
+          <Message text={message} key={index} isUser={`true`} />
         ))}
       </div>
       <div className="flex items-center justify-end p-2 bg-gray-300">

@@ -1,38 +1,32 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-const ChatList = () => {
-  const [messages, setMessages] = useState([]);
+const ChatList = ({ list }) => {
+  console.log(list);
+  const [messages, setMessage] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  useEffect(() => {
-    const fetchMessage = async () => {
-      const apiUrl = `/api/messages`; //Rendering the API endpoint
-      try {
-        setIsLoading(true);
-        const res = await fetch(apiUrl);
-        console.log(res);
-        const data = await res.json();
-        console.log(data); //Fetches data
-        setMessages(data);
-      } catch (error) {
-        console.log("error", error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    fetchMessage();
-  }, []);
-  const navigate = useNavigate();
 
-  // let description = chatData.messages.map((item) => {
-  //   return item;
-  // });
-
-  const onUserClick = () => {};
+  // useEffect(() => {
+  //   const fetchMessage = () => {
+  //     //Rendering the API endpoint
+  //     try {
+  //       list.map((item) => {
+  //         setMessage(item);
+  //         console.log(item);
+  //       });
+  //     } catch (error) {
+  //       console.log("error", error);
+  //     } finally {
+  //       setIsLoading(false);
+  //     }
+  //   };
+  //   fetchMessage();
+  // }, []);
 
   return (
     <div className="absolute w-full mt-[65px]">
-      {messages.map((item, index) => {
+      {list.map((item, index) => {
+        console.log(item, index);
         return (
           <Link
             to={`/chat/message`}
